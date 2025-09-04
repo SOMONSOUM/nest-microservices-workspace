@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement()) @map("id")
+  email     String    @unique @map("email")
+  name      String?   @map("name")
+  password  String?   @map("password")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  Session   Session[]
+
+  @@map("users")
+}
+
+model Session {
+  id           Int       @id @default(autoincrement())
+  userId       Int       @map("user_id")
+  refreshToken String    @unique @map("refresh_token")
+  deviceName   String?   @map("device_name")
+  platform     String?   @map("platform")
+  ipAddress    String?   @map("ip_address") @db.Text
+  userAgent    String?   @map("user_agent") @db.Text
+  expiresAt    DateTime  @map("expires_at")
+  revokedAt    DateTime? @map("revoked_at")
+
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+  lastActiveAt DateTime? @map("last_active_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+  @@map("sessions")
+}
