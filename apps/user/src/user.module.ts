@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { join } from 'path';
 import { TokenService } from '@app/common/token';
+import { SessionModule } from './session/session.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { TokenService } from '@app/common/token';
       global: true,
     }),
     PrismaModule,
+    SessionModule,
   ],
   controllers: [UserController],
   providers: [UserService, HashService, TokenService],
