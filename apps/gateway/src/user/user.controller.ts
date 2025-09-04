@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from '@app/common/dto';
 
 @Controller({
   path: 'users',
+  version: '1',
 })
 export class UserController {
   constructor(private readonly userService: UserService) {}
