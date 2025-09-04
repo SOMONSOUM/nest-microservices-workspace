@@ -11,7 +11,7 @@ model User {
   id        Int       @id @default(autoincrement()) @map("id")
   email     String    @unique @map("email")
   name      String?   @map("name")
-  password  String?   @map("password")
+  password  String  @map("password")
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime  @updatedAt @map("updated_at")
   Session   Session[]
@@ -29,10 +29,10 @@ model Session {
   userAgent    String?   @map("user_agent") @db.Text
   expiresAt    DateTime  @map("expires_at")
   revokedAt    DateTime? @map("revoked_at")
+  lastActiveAt DateTime? @map("last_active_at")
 
   createdAt    DateTime  @default(now()) @map("created_at")
   updatedAt    DateTime  @updatedAt @map("updated_at")
-  lastActiveAt DateTime? @map("last_active_at")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

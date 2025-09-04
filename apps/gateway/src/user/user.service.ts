@@ -1,4 +1,4 @@
-import { CreateUserDto } from '@app/common/dto';
+import { CreateUserDto, LoginUserDto } from '@app/common/dto';
 import { USER_PATTERN } from '@app/common/patterns';
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
@@ -11,5 +11,14 @@ export class UserService {
 
   async register(data: CreateUserDto) {
     return firstValueFrom(this.client.send<User>(USER_PATTERN.CREATE, data));
+  }
+
+  async login(data: LoginUserDto) {
+    return firstValueFrom(
+      this.client.send<{ accessToken: string; refreshToken: string }>(
+        USER_PATTERN.LOGIN,
+        data,
+      ),
+    );
   }
 }
