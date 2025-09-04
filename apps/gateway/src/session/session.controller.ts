@@ -1,0 +1,10 @@
+import { Controller } from '@nestjs/common';
+import { SessionService } from './session.service';
+
+@Controller({
+  version: '1',
+  path: 'sessions',
+})
+export class SessionController {
+  constructor(private readonly sessionService: SessionService) {}
+}

@@ -3,6 +3,7 @@ import { GatewayController } from './gateway.controller';
 import { GatewayService } from './gateway.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { UserModule } from './user/user.module';
+import { SessionModule } from './session/session.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { UserModule } from './user/user.module';
       },
     ]),
     UserModule,
+    SessionModule,
   ],
   controllers: [GatewayController],
   providers: [GatewayService],
