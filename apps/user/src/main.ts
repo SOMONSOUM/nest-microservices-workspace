@@ -5,6 +5,7 @@ import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(UserModule);
+
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.TCP,
     options: {

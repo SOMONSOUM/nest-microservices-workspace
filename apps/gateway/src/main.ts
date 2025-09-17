@@ -13,7 +13,7 @@ async function bootstrap() {
   await app.listen(process.env.port ?? 3000);
 
   Logger.log(
-    `Gateway service is running on: http://localhost:${process.env.port ?? 3000}`,
+    `Gateway service is running on: http://localhost:${process.env.port ?? 3000}/api`,
   );
 }
 bootstrap();
